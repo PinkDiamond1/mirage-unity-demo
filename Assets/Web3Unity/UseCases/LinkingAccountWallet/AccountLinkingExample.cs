@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -24,9 +25,10 @@ public class AccountLinkingExample : MonoBehaviour
         // Message to be signed, which should be provided by the server
 	private string message = "Hahaha!";
 	private string signature;
-	private Web3 web3;
+    private Web3 web3;
+
     [SerializeField]
-    	private Text address;
+    private TextMeshProUGUI logs;
 
 	// A backend server to verfiy the ownership of this address using message and signature signed by 3rd party wallet
 	// an example can be found at https://github.com/mirage-xyz/mirage-go-demo/blob/main/main.go#L96
@@ -47,18 +49,18 @@ public class AccountLinkingExample : MonoBehaviour
 	// step 3: server return binded address 
 	public async void Sign()
 	{
-		signature = await web3.Sign(message);
+        signature = await web3.Sign(message);
 		Debug.Log($"Signature: {signature}");
 		
 		string address = await SendSignatue(signature);
 		Debug.Log($"Answer: {address}");
 
-        	ShowAdressinUI();
+        ShowLogsinUI(signature, address);
 	}
 	
-	public void ShowAdressinUI()
+	public void ShowLogsinUI(string signature, string address)
 	{
-                address.text = signature;
+        logs.SetText("Message: "+ message + "\n"+ "Signature: " + signature + "\n" + "Address: " + address);
 	}
 
 	private async Task<string> SendSignatue(string signature)

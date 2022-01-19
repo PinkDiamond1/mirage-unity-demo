@@ -25,6 +25,8 @@ public class CustomSceneManager : MonoBehaviour
 
     public void LoadScene(string sceneName) {
         // move to previous scene
-        SceneManager.LoadScene(sceneName);
+        if(sceneName != SceneManager.GetActiveScene().ToString())
+            SceneManager.LoadScene(sceneName);
+
     }
 }
