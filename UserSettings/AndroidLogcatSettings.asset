@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RF8N91PH0BN",
         "name": "com.DefaultCompany.Web3MobileTest",
-        "processId": 18655,
+        "processId": 31405,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -306,6 +306,72 @@
             "deviceId": "RF8N91PH0BN",
             "name": "com.DefaultCompany.Web3MobileTest",
             "processId": 18655,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 22605,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 5570,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 7568,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 26394,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 3148,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 20592,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 511,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 10643,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 31244,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 13263,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 31405,
             "exited": false
         }
     ],
