@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -229,6 +229,7 @@
     <None Include="Assets\Plugins\Netherium\Nethereum.KeyStore.dll" />
     <None Include="Assets\Plugins\Netherium\Nethereum.Model.dll" />
     <None Include="Assets\Plugins\WalletConnectUnity\Packages\QRCoder.Unity.1.0.2\lib\net35\QRCoder.Unity.dll" />
+    <None Include="Assets\Plugins\Netherium\Nethereum.RPC.Reactive.dll" />
     <None Include="Assets\Plugins\Netherium\Nethereum.Signer.dll" />
     <None Include="Assets\Plugins\Netherium\System.Runtime.CompilerServices.Unsafe.dll" />
     <None Include="Assets\Plugins\Netherium\BouncyCastle.Crypto.dll" />
@@ -238,6 +239,7 @@
     <None Include="Assets\Plugins\Netherium\System.Buffers.dll" />
     <None Include="Assets\Plugins\WalletConnectUnity\Packages\System.Drawing.Common\netstandard2.0\System.Drawing.Common.dll" />
     <None Include="Assets\Plugins\Netherium\Nethereum.JsonRpc.RpcClient.dll" />
+    <None Include="Assets\Plugins\Netherium\System.Reactive.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -557,6 +559,12 @@
     </Reference>
     <Reference Include="Nethereum.Hex">
       <HintPath>Assets\Plugins\Netherium\Nethereum.Hex.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.RPC.Reactive">
+      <HintPath>Assets\Plugins\Netherium\Nethereum.RPC.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive">
+      <HintPath>Assets\Plugins\Netherium\System.Reactive.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\Users\Ludovic\Bureau\Gaming - Dev\GitHub\2020.3.23f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
