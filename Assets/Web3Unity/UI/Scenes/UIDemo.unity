@@ -7035,7 +7035,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: buttonText
-      value: 'USE CASE 2:'
+      value: 'USE CASE 2: UPDATE NFT METADATA'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1787213429}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CustomSceneManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MobileUpdateNftExample
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_Pivot.x
@@ -7103,11 +7135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 670
+      value: 857.5
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -209.88391
+      value: -309.8839
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16457,7 +16489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308357635512628, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114008992586160350, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_text
@@ -33863,7 +33895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308357635512628, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114008992586160350, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_text
@@ -47675,7 +47707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308357635512628, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114008992586160350, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_text
@@ -57459,7 +57491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224413972544493284, guid: bdb8f55c79de3ce429e354b19dc74938, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 774.2093
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 224413972544493284, guid: bdb8f55c79de3ce429e354b19dc74938, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -61291,7 +61323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: buttonText
-      value: 'USE CASE 1:  Linking Wallet'
+      value: 'USE CASE 1:  LINKING WALLET'
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size
@@ -61391,11 +61423,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 295
+      value: 482.5
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -209.88391
+      value: -309.8839
       objectReference: {fileID: 0}
     - target: {fileID: 224705272720495502, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -66167,7 +66199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308357635512628, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114008992586160350, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: m_text

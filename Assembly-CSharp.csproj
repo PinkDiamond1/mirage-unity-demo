@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Web3Unity\Scripts\Example\CustomSceneManager.cs" />
     <Compile Include="Assets\Web3Unity\UseCases\LinkingAccountWallet\AccountLinkingExample.cs" />
-    <Compile Include="Assets\Web3Unity\UI\LeftBarAnimationController.cs" />
+    <Compile Include="Assets\Web3Unity\UI\Animations\LeftBarAnimationController.cs" />
     <Compile Include="Assets\Web3Unity\Scripts\Example\ERC721Example.cs" />
     <Compile Include="Assets\Web3Unity\Scripts\Example\SignatureExample.cs" />
     <Compile Include="Assets\Web3Unity\Scripts\Library\Utils.cs" />

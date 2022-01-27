@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Web3Unity/UI/UIDemo-Opening.unity
+    path: Assets/Web3Unity/UI/Scenes/UIDemo-Opening.unity
     guid: 3d5b4d70a0cd61640aeeb485d6c66950
   - enabled: 1
-    path: Assets/Web3Unity/UI/UIDemo.unity
+    path: Assets/Web3Unity/UI/Scenes/UIDemo.unity
     guid: 8305563481143444fa9c63b1a22d2829
   - enabled: 1
     path: Assets/Web3Unity/UseCases/LinkingAccountWallet/MobileLinkingAccountWallet.unity
     guid: 70e8876719696c84bad52c86e1d4e49b
   - enabled: 1
-    path: Assets/Web3Unity/UseCases/UpdateNFT/UpdateNftExample.unity
+    path: Assets/Web3Unity/UseCases/UpdateNFT/MobileUpdateNftExample.unity
     guid: dae69e8768644e0c82a60e9d3c974a37
   m_configObjects: {}
