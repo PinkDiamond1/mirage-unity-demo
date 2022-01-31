@@ -258,3 +258,13 @@ C# parse time         : 1599ms
 candidates check time : 99ms
 console write time    : 0ms
 
+[api-updater (non-obsolete-error-filter)] 27/01/2022 17:01:37 : Starting D:/Users/Ludovic/Bureau/Gaming - Dev/GitHub/2020.3.23f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 1672,038ms
+moved types parse time: 101ms
+candidates parse time : 12ms
+C# parse time         : 1196ms
+candidates check time : 71ms
+console write time    : 6ms
+

@@ -237,6 +237,7 @@ namespace WalletConnectSharp.Unity
             {
                 throw task.Exception;
             }
+
             
             onConnected.Invoke(task.Result);
         }

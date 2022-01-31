@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Web3Unity.Scripts.Library;
@@ -38,8 +39,10 @@ public class UpdateNftExample : MonoBehaviour
 
 	// backend for get nft details and signature
 	private string url = "http://2.56.91.78:8080/";
-	
-	private void Start()
+
+    public TextMeshProUGUI text;
+
+    private void Start()
 	{
 		// ethereum node provider
 		string provider_url = "https://rinkeby.infura.io/v3/c75f2ce78a4a4b64aa1e9c20316fda3e";
@@ -55,13 +58,27 @@ public class UpdateNftExample : MonoBehaviour
 		ItemInfo info = await RequestPreparedParams(0);
 		// 2) Call method that check signature and update nft
 		string receipt = await contract.CallMethod("updateTokenWithSignedMessage", new object[] {info});
+
+        UpdateUI("Token Updated"+"\n");
 	}
 
-	private async Task<ItemInfo> RequestPreparedParams(int tokenId)
+    private async Task<ItemInfo> RequestPreparedParams(int tokenId)
 	{
 		UnityWebRequest request = UnityWebRequest.Get(url+$"hero/{tokenId}");
 		await request.Send();
 		ItemInfo data = JsonConvert.DeserializeObject<ItemInfo>(request.downloadHandler.text);
 		return data;
 	}
+
+    private void UpdateUI(string info) {
+        text.text += info;
+    }
+
+    public async void GetNFTInfo() {
+        ItemInfo info = await RequestPreparedParams(0);
+        string nftInfo = "tokenID : "+info.tokenId+"\n"+"level : "+info.level+"\n"+"\n";
+        UpdateUI(nftInfo);
+    }
+
+
 }
