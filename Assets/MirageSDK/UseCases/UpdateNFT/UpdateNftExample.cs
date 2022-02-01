@@ -8,6 +8,7 @@ using Nethereum.ABI.FunctionEncoding.Attributes;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 namespace MirageSDK.UseCases.UpdateNFT
 {
@@ -41,7 +42,10 @@ namespace MirageSDK.UseCases.UpdateNFT
 		// backend for get nft details and signature
 		private const string URL = "http://2.56.91.78:8080/";
 
-		private void Start()
+        [SerializeField]
+        private TextMeshProUGUI _text;
+
+        private void Start()
 		{
 			// ethereum node provider
 			const string providerURL = "https://rinkeby.infura.io/v3/c75f2ce78a4a4b64aa1e9c20316fda3e";
@@ -73,5 +77,15 @@ namespace MirageSDK.UseCases.UpdateNFT
 			Debug.LogError($"Error during requesting NFT Params. {request.error}");
 			return null;
 		}
-	}
+
+        private void UpdateUI(string info) {
+            _text.text += info;
+        }
+
+        public async void GetNFTInfo() {
+            ItemInfo info = await RequestPreparedParams(0);
+            string nftInfo = "tokenID : " + info.tokenId + "\n" + "level : " + info.level + "\n" + "\n";
+            UpdateUI(nftInfo);
+        }
+    }
 }

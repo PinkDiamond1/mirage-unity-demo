@@ -7,6 +7,7 @@ using MirageSDK.Core.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 // This example is to demonstrate how to bind the wallet into user account. 
 namespace MirageSDK.UseCases.LinkingAccountWallet
@@ -35,10 +36,13 @@ namespace MirageSDK.UseCases.LinkingAccountWallet
 
 		private IMirageSDK _mirageSDKWrapper;
 
+        [SerializeField]
+        private TextMeshProUGUI _logs;
 
-		// A backend server to verify the ownership of this address using message and signature signed by 3rd party wallet
-		// an example can be found at https://github.com/mirage-xyz/mirage-go-demo/blob/main/main.go#L96
-		private const string URL = "http://2.56.91.78:8080/account/verification/address";
+
+        // A backend server to verify the ownership of this address using message and signature signed by 3rd party wallet
+        // an example can be found at https://github.com/mirage-xyz/mirage-go-demo/blob/main/main.go#L96
+        private const string URL = "http://2.56.91.78:8080/account/verification/address";
 
 		private void Start()
 		{
@@ -82,5 +86,20 @@ namespace MirageSDK.UseCases.LinkingAccountWallet
 			var data = JsonConvert.DeserializeObject<RequestAnswer>(webRequest.downloadHandler.text);
 			return data.Address;
 		}
-	}
+        
+        public void CheckSignature() {
+            string address = _mirageSDKWrapper.CheckSignature(_message, _signature);
+            Debug.Log($"Address from signature: {address}");
+
+            ShowCheckSignatureLogsinUI(address);
+        }
+
+        public void ShowSignLogsinUI(string signature, string address) {
+            _logs.SetText("Message: " + _message + "\n" + "Signature: " + signature + "\n" + "Address: " + address);
+        }
+
+        public void ShowCheckSignatureLogsinUI(string address) {
+            _logs.SetText(_logs.text + "\n" + "Address from signature : " + address);// n" +"Address is the same :"+ valid);
+        }
+    }
 }
