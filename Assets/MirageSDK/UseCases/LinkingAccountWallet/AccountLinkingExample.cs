@@ -30,7 +30,7 @@ namespace MirageSDK.UseCases.LinkingAccountWallet
 		// Message to be signed, which should be provided by the server
 		[SerializeField] private string _message = "Hahaha!";
 
-		[SerializeField] private Text _address;
+		//[SerializeField] private Text _address;
 
 		private string _signature;
 
@@ -68,7 +68,7 @@ namespace MirageSDK.UseCases.LinkingAccountWallet
 
 		private void ShowAddressInUI()
 		{
-			_address.text = _signature;
+            _logs.SetText(_signature);
 		}
 
 		private async Task<string> SendSignature(string signature)

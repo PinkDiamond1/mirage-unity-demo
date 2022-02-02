@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RF8N91PH0BN",
         "name": "com.DefaultCompany.Web3MobileTest",
-        "processId": 30556,
+        "processId": 28611,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -349,6 +349,72 @@
             "name": "com.DefaultCompany.Web3MobileTest",
             "processId": 30556,
             "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 13000,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 15572,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 15547,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 10748,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 24359,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 13508,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 6976,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 12793,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 18158,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 23895,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N91PH0BN",
+            "name": "com.DefaultCompany.Web3MobileTest",
+            "processId": 28611,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -359,7 +425,7 @@
             },
             {
                 "m_Name": "No Filter",
-                "m_Selected": false
+                "m_Selected": true
             },
             {
                 "m_Name": "",
@@ -375,7 +441,7 @@
             },
             {
                 "m_Name": "Unity",
-                "m_Selected": true
+                "m_Selected": false
             },
             {
                 "m_Name": "CRASH",
