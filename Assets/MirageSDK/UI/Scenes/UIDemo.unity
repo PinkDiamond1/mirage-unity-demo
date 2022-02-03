@@ -6035,7 +6035,7 @@ PrefabInstance:
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1787213429}
+      objectReference: {fileID: 983818689}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -6046,7 +6046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CustomSceneManager, Assembly-CSharp
+      value: MirageSDK.Examples.CustomSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -16628,10 +16628,10 @@ RectTransform:
   m_Father: {fileID: 1839168765}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.75, y: 245.75}
-  m_SizeDelta: {x: -100, y: 25}
+  m_SizeDelta: {x: 1240, y: 25}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &492647526
 MonoBehaviour:
@@ -17704,6 +17704,7 @@ GameObject:
   - component: {fileID: 533005553}
   - component: {fileID: 533005552}
   - component: {fileID: 533005551}
+  - component: {fileID: 533005554}
   m_Layer: 5
   m_Name: UseCaseIndex
   m_TagString: Untagged
@@ -17772,6 +17773,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533005549}
   m_CullTransparentMesh: 0
+--- !u!114 &533005554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533005549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb2ffb6f3eccb047a8679576819e81a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loginButton: {fileID: 202117263}
+  _useCaseButtonsMenu: {fileID: 1839168764}
 --- !u!1 &533974197
 GameObject:
   m_ObjectHideFlags: 0
@@ -31617,6 +31632,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974393997}
   m_CullTransparentMesh: 0
+--- !u!1 &983818688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 983818690}
+  - component: {fileID: 983818689}
+  m_Layer: 0
+  m_Name: CustomSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &983818689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983818688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95845d48ceee4155879501728e2847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &983818690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983818688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &986398472
 GameObject:
   m_ObjectHideFlags: 0
@@ -54801,6 +54859,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 202117262}
     - target: {fileID: 5735298395508524472, guid: 2d0cfda22d6430b429b4ba267780216f, type: 3}
+      propertyPath: customBridgeUrl
+      value: https://testbridge.yartu.io/
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735298395508524472, guid: 2d0cfda22d6430b429b4ba267780216f, type: 3}
       propertyPath: ConnectedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -54927,17 +54989,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 801bffbf4c62cc244b55ea230d19649d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1787213429 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5735298395508524479, guid: 2d0cfda22d6430b429b4ba267780216f, type: 3}
-  m_PrefabInstance: {fileID: 1787213427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95845d48ceee4155879501728e2847c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1787918870
@@ -60327,7 +60378,7 @@ PrefabInstance:
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1787213429}
+      objectReference: {fileID: 983818689}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -60338,7 +60389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CustomSceneManager, Assembly-CSharp
+      value: MirageSDK.Examples.CustomSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 114576293925360936, guid: e5593e182ed176545b6eb3875b7f345c, type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -63559,10 +63610,10 @@ RectTransform:
   m_Father: {fileID: 1839168765}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 24, y: 256}
-  m_SizeDelta: {x: -1335, y: 25}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -646, y: 256}
+  m_SizeDelta: {x: 5, y: 25}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2021124353
 MonoBehaviour:
