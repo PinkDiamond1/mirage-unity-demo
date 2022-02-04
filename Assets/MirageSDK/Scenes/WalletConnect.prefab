@@ -57,10 +57,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801bffbf4c62cc244b55ea230d19649d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoginButton: {fileID: 0}
+  AllowedWalletIds: []
   DefaultWallet: 1
-  persistThroughScenes: 1
-  waitForWalletOnStart: 1
+  autoSaveAndResume: 1
+  connectOnAwake: 0
+  connectOnStart: 1
+  createNewSessionOnSessionDisconnect: 1
+  connectSessionRetryCount: 3
   customBridgeUrl: https://bridge.walletconnect.org
   chainId: 1
   ConnectedEvent:
@@ -91,6 +94,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   ConnectedEventSession:
+    m_PersistentCalls:
+      m_Calls: []
+  DisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ConnectionFailedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  NewSessionConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  ResumedSessionConnected:
     m_PersistentCalls:
       m_Calls: []
   AppData:

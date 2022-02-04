@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using WalletConnectSharp.Unity;
 
 // This example is to demonstrate how to bind the wallet into user account. 
 namespace MirageSDK.UseCases.LinkingAccountWallet
@@ -57,13 +58,13 @@ namespace MirageSDK.UseCases.LinkingAccountWallet
 		// step 3: server return binded address 
 		public async void Sign()
 		{
-			_signature = await _mirageSDKWrapper.Sign(_message);
+            _signature = await _mirageSDKWrapper.Sign(_message);
 			Debug.Log($"Signature: {_signature}");
-
-			var address = await SendSignature(_signature);
+            //Debug logs
+            var address = await SendSignature(_signature);
 			Debug.Log($"Answer: {address}");
 
-			ShowAddressInUI();
+            ShowAddressInUI();
 		}
 
 		private void ShowAddressInUI()
@@ -99,7 +100,7 @@ namespace MirageSDK.UseCases.LinkingAccountWallet
         }
 
         public void ShowCheckSignatureLogsinUI(string address) {
-            _logs.SetText(_logs.text + "\n" + "Address from signature : " + address);// n" +"Address is the same :"+ valid);
+            _logs.SetText(_logs.text + "\n" + "Address from signature : " + address);
         }
     }
 }
