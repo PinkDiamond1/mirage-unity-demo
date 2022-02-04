@@ -124,6 +124,8 @@ namespace WalletConnectSharp.Unity
 		public async Task<WCSessionData> Connect()
 		{
 			SavedSession savedSession = null;
+			Debug.Log("Session Key Found :"+PlayerPrefs.HasKey(SessionKey));
+			
 			if (PlayerPrefs.HasKey(SessionKey))
 			{
 				var json = PlayerPrefs.GetString(SessionKey);
@@ -189,6 +191,7 @@ namespace WalletConnectSharp.Unity
 			Session = savedSession != null
 				? new WalletConnectUnitySession(savedSession, this, _transport)
 				: new WalletConnectUnitySession(AppData, this, customBridgeUrl, _transport, ciper, chainId);
+				
 
 			SetupDefaultWallet().Forget();
 
@@ -229,6 +232,13 @@ namespace WalletConnectSharp.Unity
 		private void SessionOnOnSessionCreated(object sender, WalletConnectSession e)
 		{
 			NewSessionConnected?.Invoke(e as WalletConnectUnitySession ?? Session);
+			Debug.Log("Session Created ");
+			
+			var session = Session.SaveSession();
+			var json = JsonConvert.SerializeObject(session);
+			PlayerPrefs.SetString(SessionKey, json);
+			Debug.Log("Has Created SessionKey and saved it in PlayerPrefs :"+PlayerPrefs.HasKey(SessionKey));
+			
 		}
 
 		private async Task<WCSessionData> CompleteConnect()
@@ -277,6 +287,7 @@ namespace WalletConnectSharp.Unity
 			if (autoSaveAndResume && PlayerPrefs.HasKey(SessionKey))
 			{
 				PlayerPrefs.DeleteKey(SessionKey);
+				Debug.Log("Deleting SessionKey");
 			}
 
 			TeardownEvents();
@@ -392,6 +403,21 @@ namespace WalletConnectSharp.Unity
 				await Connect();
 			}
 		}
+		
+		
+		private void OnApplicationFocus(bool hasFocus)
+		{
+			if (hasFocus)
+			{
+				//your app is NO LONGER in the background
+				Debug.Log("App no longer in Background");
+			}
+			else
+			{
+				//your app is now in the background
+				Debug.Log("App in Background");
+			}
+		}
 
 		private async Task SaveOrDisconnect()
 		{
@@ -405,7 +431,8 @@ namespace WalletConnectSharp.Unity
 				var session = Session.SaveSession();
 				var json = JsonConvert.SerializeObject(session);
 				PlayerPrefs.SetString(SessionKey, json);
-
+				Debug.LogError("Has Created Key in PlayerPrefs :"+PlayerPrefs.HasKey(SessionKey));
+				
 				await Session.Transport.Close();
 			}
 			else
