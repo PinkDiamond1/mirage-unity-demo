@@ -15,11 +15,11 @@ namespace MirageSDK.UseCases
         [SerializeField]
         private GameObject _useCaseButtonsMenu;
 
-        void Start() {
-            if(WalletConnect.ActiveSession.Connected) {
+        void Start()
+        {
+            if(PlayerPrefs.HasKey(WalletConnect.SessionKey)) 
                 EnableUseCaseMenu();
-            }
-
+            
         }
 
         private void EnableUseCaseMenu() {
