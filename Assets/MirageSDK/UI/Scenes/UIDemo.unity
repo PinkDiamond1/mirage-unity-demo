@@ -44908,13 +44908,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '-Click the LOGIN button to log into your compatbiel wallet (Metamask,TrustWallet
-    etc...)
-
-
-    -Select one of the Use Cases
-
-'
+  m_text: "If this is your first Session : \n-Click the LOGIN button to log into
+    your compatible wallet (Metamask,TrustWallet etc...)\n\n\n-Select one of the
+    Use Cases\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fa328c1ae3ffb6b4583cf371153b0be6, type: 2}
   m_sharedMaterial: {fileID: 21918420405216288, guid: fa328c1ae3ffb6b4583cf371153b0be6, type: 2}
