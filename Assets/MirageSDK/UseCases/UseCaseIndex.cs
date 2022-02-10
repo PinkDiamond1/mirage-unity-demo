@@ -17,7 +17,7 @@ namespace MirageSDK.UseCases
 
         void Start()
         {
-            if(PlayerPrefs.HasKey(WalletConnect.SessionKey)) 
+            if(WalletConnect.IsSessionSaved()) 
                 EnableUseCaseMenu();
             
         }
