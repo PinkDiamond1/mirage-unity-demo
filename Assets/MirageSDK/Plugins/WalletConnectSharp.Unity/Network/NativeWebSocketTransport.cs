@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using MirageSDK.WalletConnectSharp.Core.Events;
+using MirageSDK.WalletConnectSharp.Core.Events.Model;
+using MirageSDK.WalletConnectSharp.Core.Models;
+using MirageSDK.WalletConnectSharp.Core.Network;
 using NativeWebSocket;
 using Newtonsoft.Json;
 using UnityEngine;
-using WalletConnectSharp.Core.Events;
-using WalletConnectSharp.Core.Events.Request;
-using WalletConnectSharp.Core.Events.Response;
-using WalletConnectSharp.Core.Models;
-using WalletConnectSharp.Core.Network;
 
-namespace WalletConnectSharp.Unity.Network
+namespace MirageSDK.WalletConnectSharp.Unity.Network
 {
 	public class NativeWebSocketTransport : MonoBehaviour, ITransport
 	{
@@ -25,7 +24,7 @@ namespace WalletConnectSharp.Unity.Network
 		private List<string> subscribedTopics = new List<string>();
 		private Queue<NetworkMessage> _queuedMessages = new Queue<NetworkMessage>();
 
-		public bool Connected => client is { State: WebSocketState.Open } && opened;
+		public bool Connected => client?.State == WebSocketState.Open && opened;
 
 		public void AttachEventDelegator(EventDelegator eventDelegator)
 		{
@@ -207,7 +206,7 @@ namespace WalletConnectSharp.Unity.Network
 		private void Update()
 		{
 		#if !UNITY_WEBGL || UNITY_EDITOR
-			if (client is { State: WebSocketState.Open })
+			if (client?.State == WebSocketState.Open)
 			{
 				client.DispatchMessageQueue();
 			}
@@ -304,6 +303,14 @@ namespace WalletConnectSharp.Unity.Network
 		public void ClearSubscriptions()
 		{
 			Debug.Log("[WebSocket] Subs Cleared");
+			if (_eventDelegator != null)
+			{
+				foreach (var subscribedTopic in subscribedTopics)
+				{
+					_eventDelegator.UnsubscribeProvider(subscribedTopic);
+				}
+			}
+
 			subscribedTopics.Clear();
 			_queuedMessages.Clear();
 		}

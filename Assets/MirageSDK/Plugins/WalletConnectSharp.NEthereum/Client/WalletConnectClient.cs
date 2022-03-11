@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MirageSDK.WalletConnectSharp.Core;
 using Nethereum.JsonRpc.Client;
 using Nethereum.JsonRpc.Client.RpcMessages;
-using WalletConnectSharp.Core;
 
-namespace WalletConnectSharp.NEthereum.Client
+namespace MirageSDK.WalletConnectSharp.NEthereum.Client
 {
     public class WalletConnectClient : ClientBase
     {
@@ -31,11 +31,11 @@ namespace WalletConnectSharp.NEthereum.Client
             else
                 rpcRequestMessage = new RpcRequestMessage(_id, message.Method, rawParameters);
             
-            TaskCompletionSource<RpcResponseMessage> eventCompleted = new TaskCompletionSource<RpcResponseMessage>(TaskCreationOptions.None);
+            var eventCompleted = new TaskCompletionSource<RpcResponseMessage>(TaskCreationOptions.None);
             
             Provider.Events.ListenForGenericResponse<RpcResponseMessage>(rpcRequestMessage.Id, (sender, args) =>
             {
-                eventCompleted.SetResult(args.Response);
+                eventCompleted.TrySetResult(args.Response);
             });
             
             await Provider.SendRequest(rpcRequestMessage);

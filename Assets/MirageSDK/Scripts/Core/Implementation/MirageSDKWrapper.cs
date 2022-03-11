@@ -1,45 +1,56 @@
 using System;
-using System.Threading.Tasks;
 using MirageSDK.Core.Infrastructure;
-using Nethereum.JsonRpc.Client;
-using Nethereum.Signer;
+using MirageSDK.WalletConnectSharp.NEthereum;
+using MirageSDK.WalletConnectSharp.Unity;
 using Nethereum.Web3;
-using WalletConnectSharp.NEthereum;
-using WalletConnectSharp.Unity;
 
 namespace MirageSDK.Core.Implementation
 {
 	public class MirageSDKWrapper : IMirageSDK
 	{
-		private readonly IWeb3 _provider;
-		private readonly IClient _client;
+		private readonly IWeb3 _web3Provider;
 
-		private MirageSDKWrapper(string providerURL)
+		public EthHandler Eth { get; }
+
+		private MirageSDKWrapper(string providerURI)
 		{
+			_web3Provider = CreateWeb3Provider(providerURI);
+			Eth = new EthHandler(_web3Provider);
+		}
+
+		/// <summary>
+		///     Use this if you want to work with contracts from a single web3 provider.
+		/// </summary>
+		/// <param name="providerURI"></param>
+		/// <returns></returns>
+		public static IMirageSDK GetSDKInstance(string providerURI)
+		{
+			return new MirageSDKWrapper(providerURI);
+		}
+		
+		/// <summary>
+		/// Creates a contract using provided web3 instance.
+		/// </summary>
+		/// <param name="contractAddress">Contract address</param>
+		/// <param name="contractABI">Contract ABI</param>
+		/// <returns>Initialized contract handler</returns>
+		public IContract GetContract(string contractAddress, string contractABI)
+		{
+			return new Contract(_web3Provider, Eth, contractAddress, contractABI);
+		}
+
+		private static IWeb3 CreateWeb3Provider(string providerURI)
+		{
+			if (WalletConnect.Instance == null || WalletConnect.Instance.Session == null)
+			{
+				throw new ArgumentNullException(nameof(WalletConnect.Instance),
+					"WalletConnect should be initialized before creating web3Provider");
+			}
+
 			var wcProtocol = WalletConnect.Instance.Session;
-			_client = wcProtocol.CreateProvider(new Uri(providerURL));
-			_provider = new Web3(_client);
-		}
-
-		public static IMirageSDK GetInitializedInstance(string providerURL)
-		{
-			return new MirageSDKWrapper(providerURL);
-		}
-
-		public IContract GetContract(string address, string abi)
-		{
-			return new Contract(_provider, _client, address, abi);
-		}
-
-		public Task<string> Sign(string message)
-		{
-			return WalletConnect.ActiveSession.EthSign(WalletConnect.ActiveSession.Accounts[0], message);
-		}
-
-		public string CheckSignature(string message, string signature)
-		{
-			var signer = new EthereumMessageSigner();
-			return signer.EncodeUTF8AndEcRecover(message, signature);
+			var client = wcProtocol.CreateProvider(new Uri(providerURI));
+			var web3Provider = new Web3(client);
+			return web3Provider;
 		}
 	}
 }

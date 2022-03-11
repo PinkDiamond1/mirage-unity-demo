@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
+using MirageSDK.WalletConnectSharp.Core;
 using Nethereum.JsonRpc.Client;
-using WalletConnectSharp.Core;
 
-namespace WalletConnectSharp.NEthereum.Client
+namespace MirageSDK.WalletConnectSharp.NEthereum.Client
 {
     public class FallbackProvider : IClient
     {
@@ -14,8 +14,8 @@ namespace WalletConnectSharp.NEthereum.Client
 
         public FallbackProvider(IClient primary, IClient fallback)
         {
-            this._signer = primary;
-            this._fallback = fallback;
+            _signer = primary;
+            _fallback = fallback;
         }
         
         public Task SendRequestAsync(RpcRequest request, string route = null)

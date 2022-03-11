@@ -2,16 +2,17 @@ using System.Numerics;
 using Cysharp.Threading.Tasks;
 using MirageSDK.Core.Implementation;
 using MirageSDK.Core.Infrastructure;
-using MirageSDK.Examples.Scripts.ContractMessages;
-using Newtonsoft.Json.Linq;
+using MirageSDK.Core.Utils;
+using MirageSDK.Examples.ContractMessages.ERC1155;
+using MirageSDK.Examples.ContractMessages.GameCharacterContract;
+using MirageSDK.WalletConnectSharp.Unity;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using WalletConnectSharp.Unity;
 
-namespace MirageSDK.Examples.Scripts.WearableNFTExample
+namespace MirageSDK.Examples.WearableNFTExample
 {
 	/// <summary>
-	/// You need to have a minter role for this example to work.
+	///     You need to have a minter role for this example to work.
 	/// </summary>
 	public class WearableNFTExample : MonoBehaviour
 	{
@@ -22,17 +23,18 @@ namespace MirageSDK.Examples.Scripts.WearableNFTExample
 		private const string WhiteShoesAddress = "0x00020000000000000000000000000000000000000000000000000000000003";
 		private const string RedGlassesAddress = "0x00030000000000000000000000000000000000000000000000000000000002";
 		private const string WhiteGlassesAddress = "0x00030000000000000000000000000000000000000000000000000000000003";
-		
+
+		[SerializeField] private TMP_Text _text;
+
 		private IContract _gameCharacterContract;
 		private IContract _gameItemContract;
 
-		[SerializeField]
-		private Text _text;
-
 		private void Start()
 		{
-			var mirageSDKWrapper = MirageSDKWrapper.GetInitializedInstance(WearableNFTContractInformation.ProviderURL);
-			_gameCharacterContract = mirageSDKWrapper.GetContract(WearableNFTContractInformation.GameCharacterContractAddress, WearableNFTContractInformation.GameCharacterABI);
+			var mirageSDKWrapper = MirageSDKWrapper.GetSDKInstance(WearableNFTContractInformation.ProviderURL);
+			_gameCharacterContract = mirageSDKWrapper.GetContract(
+				WearableNFTContractInformation.GameCharacterContractAddress,
+				WearableNFTContractInformation.GameCharacterABI);
 			_gameItemContract = mirageSDKWrapper.GetContract(WearableNFTContractInformation.GameItemContractAddress,
 				WearableNFTContractInformation.GameItemABI);
 		}
@@ -42,20 +44,17 @@ namespace MirageSDK.Examples.Scripts.WearableNFTExample
 			await MintItems();
 			await MintCharacter();
 			await GameItemSetApproval();
-			await GetTokenInfo();
+			await GetCharacterTokenId();
 			await ChangeHat(BlueHatAddress);
 			await GetHat();
 			await ChangeHat(RedHatAddress);
 			await GetHat();
 		}
-		public async void MintNFTsCall()
-		{
-			//await MintItems();
-			await MintCharacter();
-		}
+
 		private async UniTask MintItems()
 		{
 			const string mintBatchMethodName = "mintBatch";
+			const string mintBatchToAddress = "0x510c522ebCC6Eb376839E0CFf5D57bb2F422EB8b";
 			var itemsToMint = new[]
 			{
 				BlueHatAddress,
@@ -63,16 +62,17 @@ namespace MirageSDK.Examples.Scripts.WearableNFTExample
 				BlueShoesAddress,
 				WhiteShoesAddress,
 				RedGlassesAddress,
-				WhiteGlassesAddress,
+				WhiteGlassesAddress
 			};
 			var itemsAmounts = new[]
 			{
 				1, 2, 3, 4, 5, 6
 			};
+			var data = new byte[] { };
 
 			var receipt = await _gameItemContract.CallMethod(mintBatchMethodName,
-				new object[] { itemsToMint, itemsAmounts });
-			Debug.Log($"Game Items Minted. Receipts : {receipt}");
+				new object[] {mintBatchToAddress, itemsToMint, itemsAmounts, data});
+
 			UpdateUILogs($"Game Items Minted. Receipts : {receipt}");
 		}
 
@@ -81,99 +81,162 @@ namespace MirageSDK.Examples.Scripts.WearableNFTExample
 			const string safeMintMethodName = "safeMint";
 
 			var transactionHash = await _gameCharacterContract.CallMethod(safeMintMethodName);
-			Debug.Log($"Game Character Minted. Hash : {transactionHash}");
+
 			UpdateUILogs($"Game Character Minted. Hash : {transactionHash}");
 		}
-		public async void GameItemSetApprovalCall()
-		{
-			await GameItemSetApproval();
-		}
-		
+
+		//Cant be called by the operator
 		private async UniTask GameItemSetApproval()
 		{
-			const string setApprovalMethodName = "setApprovalForAll";
-			
-			var transactionHash = await _gameItemContract.CallMethod(setApprovalMethodName, new object[]
-			{
+			var transactionHash = await ERC721ContractFunctions.SetApprovalForAll(
 				WearableNFTContractInformation.GameCharacterContractAddress,
-				true
-			});
-			
-			Debug.Log($"Game Character approved. Hash : {transactionHash}");
-			UpdateUILogs($"Game Character approved. Hash : {transactionHash}");
-			
-		}
-		
-		public async void GetBalanceCall()
-		{
-			await GetBalance();
+				true, _gameItemContract);
+
+			UpdateUILogs($"Game Items approved. Hash : {transactionHash}");
 		}
 
-		private async UniTask<BigInteger> GetBalance()
+		private async UniTask<BigInteger> GetCharacterBalance()
+		{
+			var activeSessionAccount = WalletConnect.ActiveSession.Accounts[0];
+			var balance = await ERC721ContractFunctions.BalanceOf(activeSessionAccount, _gameCharacterContract);
+
+			UpdateUILogs($"Number of NFTs Owned: {balance}");
+			return balance;
+		}
+
+		private async UniTask<BigInteger> GetBalanceERC1155(IContract contract, string id)
 		{
 			var activeSessionAccount = WalletConnect.ActiveSession.Accounts[0];
 			var balanceOfMessage = new BalanceOfMessage
 			{
-				Owner = activeSessionAccount
+				Account = activeSessionAccount,
+				Id = id
 			};
-			var balance = await _gameCharacterContract.GetData<BalanceOfMessage, BigInteger>(balanceOfMessage);
-			Debug.Log($"Balance: {balance}");
-			UpdateUILogs($"Balance: {balance}");
+			var balance =
+				await contract.GetData<BalanceOfMessage, BigInteger>(balanceOfMessage);
+
+			UpdateUILogs($"Number of NFTs Owned: {balance}");
 			return balance;
 		}
-		public async void GetTokenInfoCall()
+
+		private async UniTask<BigInteger> GetCharacterTokenId()
 		{
-			await GetTokenInfo();
+			var activeSessionAccount = WalletConnect.ActiveSession.Accounts[0];
+			var tokenBalance = await GetCharacterBalance();
+
+			if (tokenBalance > 0)
+			{
+				var tokenId =
+					await ERC721ContractFunctions.TokenOfOwnerByIndex(activeSessionAccount, 0, _gameCharacterContract);
+
+				UpdateUILogs($"GameCharacter tokenId  : {tokenId}");
+
+				return tokenId;
+			}
+
+			UpdateUILogs("You dont own any of these tokens.");
+			return -1;
 		}
-		private async UniTask GetTokenInfo()
+
+		private async UniTask<bool> GetHasHatToken(string tokenAddress)
 		{
-			const string tokenOfOwnerByIndex = "tokenOfOwnerByIndex";
-			var tokenBalance = await GetBalance();
-			var token = await _gameCharacterContract.CallMethod(tokenOfOwnerByIndex, new object[] { tokenBalance - 1 });
-			
-			Debug.Log($"Minted Token token : {token}");
-			UpdateUILogs($"Minted Token token : {token}");
+			var tokenBalance = await GetBalanceERC1155(_gameItemContract, tokenAddress);
+
+			if (tokenBalance > 0)
+			{
+				UpdateUILogs("You have " + tokenBalance + " hats");
+				return true;
+			}
+
+			UpdateUILogs("You dont have any Hat Item");
+			return false;
 		}
-		public async void ChangeRedHatCall()
-		{
-			await ChangeHat(RedHatAddress);
-		}
-		public async void ChangeBlueHatCall()
-		{
-			await ChangeHat(BlueHatAddress);
-		}
+
 		private async UniTask ChangeHat(string hatAddress)
 		{
 			const string changeHatMethodName = "changeHat";
-			
-			var transactionHash = await _gameItemContract.CallMethod(changeHatMethodName, new object[]
-			{
-				hatAddress
-			}, TransactionGasLimit);
+			var characterId = await GetCharacterTokenId();
 
-			Debug.Log($"Hat Changed. Hash : {transactionHash}");
-			UpdateUILogs($"Hat Changed. Hash : {transactionHash}");
+			var hasHat = await GetHasHatToken(hatAddress);
+
+			if (!hasHat || characterId.Equals(-1))
+			{
+				UpdateUILogs("ERROR : CharacterID or HatID is null");
+			}
+			else
+			{
+				var transactionHash = await _gameCharacterContract.CallMethod(changeHatMethodName, new object[]
+				{
+					characterId,
+					BlueHatAddress
+				}, TransactionGasLimit);
+
+				UpdateUILogs($"Hat Changed. Hash : {transactionHash}");
+			}
 		}
-		public async void GetHatCall()
-		{
-			await GetHat();
-		}
+
 		private async UniTask<BigInteger> GetHat()
 		{
-			var activeSessionAccount = WalletConnect.ActiveSession.Accounts[0];
-			var balanceOfMessage = new ItemMessage
+			var characterID = await GetCharacterTokenId();
+			var getHatMessage = new GetHatMessage
 			{
-				CharacterId = activeSessionAccount
+				CharacterId = characterID.ToString()
 			};
-			var hatId = await _gameCharacterContract.GetData<ItemMessage, BigInteger>(balanceOfMessage);
-			Debug.Log($"Hat Id: {hatId}");
+			var hatId = await _gameCharacterContract.GetData<GetHatMessage, BigInteger>(getHatMessage);
+
 			UpdateUILogs($"Hat Id: {hatId}");
+
 			return hatId;
 		}
 
 		private void UpdateUILogs(string log)
 		{
-			_text.text = log;
+			_text.text += "\n" + log;
+			Debug.Log(log);
 		}
+
+		#region Button Calls
+
+		public async void MintItemsCall()
+		{
+			await MintItems();
+		}
+
+		public async void MintCharacterCall()
+		{
+			await MintCharacter();
+		}
+
+		public async void GetBalanceCall()
+		{
+			await GetCharacterBalance();
+		}
+
+		public async void GameItemSetApprovalCall()
+		{
+			await GameItemSetApproval();
+		}
+
+		public async void GetTokenIdCall()
+		{
+			await GetCharacterTokenId();
+		}
+
+		public async void ChangeRedHatCall()
+		{
+			await ChangeHat(RedHatAddress);
+		}
+
+		public async void ChangeBlueHatCall()
+		{
+			await ChangeHat(BlueHatAddress);
+		}
+
+		public async void GetHatCall()
+		{
+			await GetHat();
+		}
+
+		#endregion
 	}
 }

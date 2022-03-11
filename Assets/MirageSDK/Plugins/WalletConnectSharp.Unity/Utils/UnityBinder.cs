@@ -5,10 +5,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using WalletConnectSharp.Core.Models;
 using Object = UnityEngine.Object;
 
-namespace WalletConnectSharp.Unity.Utils
+namespace MirageSDK.WalletConnectSharp.Unity.Utils
 {
 	/// <summary>
 	/// UnityBinder entry class. Use this class to setup any Unity Object that has any

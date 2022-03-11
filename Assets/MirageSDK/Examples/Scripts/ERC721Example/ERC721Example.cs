@@ -2,23 +2,27 @@
 using System.Numerics;
 using MirageSDK.Core.Implementation;
 using MirageSDK.Core.Infrastructure;
-using MirageSDK.Examples.Scripts.ContractMessages;
-using MirageSDK.Examples.Scripts.DTO;
+using MirageSDK.Examples.ContractMessages.ERC721;
+using MirageSDK.Examples.DTO;
+using MirageSDK.WalletConnectSharp.Unity;
 using UnityEngine;
-using WalletConnectSharp.Unity;
 
-namespace MirageSDK.Examples.Scripts.ERC721Example
+namespace MirageSDK.Examples.ERC721Example
 {
 	public class ERC721Example : MonoBehaviour
 	{
 		private const string MintMethodName = "mint";
 		private IContract _erc721Contract;
+		private EthHandler _eth;
 
 		private void Start()
 		{
-			var mirageSDKWrapper = MirageSDKWrapper.GetInitializedInstance(ERC721ContractInformation.ProviderURL);
+			var mirageSDKWrapper = MirageSDKWrapper.GetSDKInstance(ERC721ContractInformation.ProviderURL);
 			_erc721Contract =
-				mirageSDKWrapper.GetContract(ERC721ContractInformation.ContractAddress, ERC721ContractInformation.ABI);
+				mirageSDKWrapper.GetContract(
+					ERC721ContractInformation.ContractAddress,
+					ERC721ContractInformation.ABI);
+			_eth = mirageSDKWrapper.Eth;
 		}
 
 		public async void CallMint()
@@ -26,7 +30,7 @@ namespace MirageSDK.Examples.Scripts.ERC721Example
 			var receipt = await _erc721Contract.CallMethod(MintMethodName, Array.Empty<object>());
 			Debug.Log($"Receipt: {receipt}");
 
-			var trx = await _erc721Contract.GetTransactionInfo(receipt);
+			var trx = await _eth.GetTransaction(receipt);
 
 			Debug.Log($"Nonce: {trx.Nonce}");
 		}

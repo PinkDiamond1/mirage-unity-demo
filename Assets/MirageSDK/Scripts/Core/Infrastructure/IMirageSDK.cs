@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
+using MirageSDK.Core.Implementation;
 
 namespace MirageSDK.Core.Infrastructure
 {
 	public interface IMirageSDK
 	{
-		IContract GetContract(string address, string abi);
-		Task<string> Sign(string message);
-		string CheckSignature(string message, string signature);
+		EthHandler Eth { get; }
+		IContract GetContract(string contractAddress, string contractABI);
 	}
 }
